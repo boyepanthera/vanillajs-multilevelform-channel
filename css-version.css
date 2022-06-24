@@ -1,0 +1,23 @@
+.form-field {
+  display: block;
+  width: 100%;
+}
+
+form {
+  padding: 1rem;
+  width: 25%;
+  background-color: cyan;
+}
+
+#level-2,
+#level-3 {
+  display: none;
+}
+
+.level-switch {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

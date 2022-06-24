@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-level Vanilla Form</title>
+    <link rel="stylesheet" href="css-version.css" />
+  </head>
+  <body>
+    <form>
+      <!-- Level one -->
+      <div id="level-1">
+        <h2>Level One - Basic Info</h2>
+        <div>
+          <label for="first_name"> <strong>First Name</strong></label>
+          <input
+            id="first_name"
+            class="form-field"
+            type="text"
+            name="first_name"
+            placeholder="John"
+          />
+        </div>
+        <div>
+          <label for="last_name"> <strong>Last Name</strong></label>
+          <input
+            id="last_name"
+            class="form-field"
+            type="text"
+            name="first_name"
+            placeholder="John"
+          />
+        </div>
+        <div>
+          <label> <strong>Date of Birth</strong></label>
+          <input class="form-field" type="date" name="dob" />
+        </div>
+        <div class="level-switch">
+          <button onclick="SetPrevious()" type="button">Previous</button>
+          <button onclick="SetNext()" type="button">Next</button>
+        </div>
+      </div>
+
+      <!-- Level Two -->
+      <div id="level-2">
+        <h2>Level Two - Login Info</h2>
+        <div>
+          <label for="email"> <strong>Email</strong></label>
+          <input
+            id="email"
+            class="form-field"
+            type="email"
+            name="email"
+            placeholder="johndoe@gmail.com"
+          />
+        </div>
+        <div>
+          <label for="password"> <strong>Password</strong></label>
+          <input
+            id="password"
+            class="form-field"
+            type="password"
+            name="password"
+          />
+        </div>
+        <div>
+          <label for="confirm_password">
+            <strong>Confirm Password</strong></label
+          >
+          <input
+            id="confirm_password"
+            class="form-field"
+            type="password"
+            name="password"
+          />
+        </div>
+        <div class="level-switch">
+          <button onclick="SetPrevious()" type="button">Previous</button>
+          <button onclick="SetNext()" type="button">Next</button>
+        </div>
+      </div>
+
+      <!-- Level Three -->
+      <div id="level-3">
+        <h2>Level Three - Investment Info</h2>
+        <div>
+          <label for="initial-investment">
+            <strong>Initial Investment: </strong>
+            <span id="investment-board"></span
+          ></label>
+          <input
+            id="initial-investment"
+            class="form-field"
+            value="0"
+            type="range"
+            onchange="HandleInvestment(event)"
+            name="initial_investment"
+          />
+        </div>
+        <div>
+          <label for="bank"> <strong>Bank</strong></label>
+          <select name="bank" id="bank">
+            <option value="Gomummy Bank">Gomummy Bank</option>
+            <option value="Fatherstar Bank">Fatherstar Bank</option>
+            <option value="Goldfish Bank">Goldfish Bank</option>
+          </select>
+        </div>
+        <div>
+          <label for="duration"> <strong>Investment Duration</strong></label>
+          <select id="duration" class="form-field" name="duration">
+            <option value="6 Months">6 Months</option>
+            <option value="1 Year">1 Year</option>
+            <option value="2 Years">2 Years</option>
+            <option value="3 Years">3 Years</option>
+          </select>
+        </div>
+        <div class="level-switch">
+          <button onclick="SetPrevious()" type="button">Previous</button>
+          <button onclick="SetNext()" type="button">Next</button>
+        </div>
+      </div>
+    </form>
+
+    <script>
+      var levelOne = document.getElementById('level-1')
+      var levelTwo = document.getElementById('level-2')
+      var levelThree = document.getElementById('level-3')
+      var currentLevel = 1
+
+      // For handling change in initial investment slider
+      var investmentBoard = document.getElementById('investment-board')
+      function HandleInvestment(event) {
+        investmentBoard.innerHTML =
+          '&#8358;' + (Number(event.target.value) * 50000).toLocaleString()
+      }
+
+      function SwitchLevel(currentLevel) {
+        if (currentLevel === 3) {
+          levelOne.style.display = 'none'
+          levelTwo.style.display = 'none'
+          levelThree.style.display = 'block'
+        } else if (currentLevel === 2) {
+          levelOne.style.display = 'none'
+          levelTwo.style.display = 'block'
+          levelThree.style.display = 'none'
+        } else {
+          levelOne.style.display = 'block'
+          levelTwo.style.display = 'none'
+          levelThree.style.display = 'none'
+        }
+        return
+      }
+      //   Function to handle next swithing
+      function SetNext() {
+        if (currentLevel >= 1 && currentLevel < 3) {
+          ++currentLevel
+          SwitchLevel(currentLevel)
+          return
+        }
+      }
+
+      function SetPrevious() {
+        if (currentLevel > 1 && currentLevel <= 3) {
+          --currentLevel
+          SwitchLevel(currentLevel)
+          return
+        }
+      }
+    </script>
+  </body>
+</html>
